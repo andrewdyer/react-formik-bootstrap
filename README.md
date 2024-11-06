@@ -1,13 +1,13 @@
-# React Package Template
+# React Formik Bootstrap
 
-A template for creating React packages.
+A React library of Formik-powered, Bootstrap-styled components for efficient form building.
 
 ## Getting Started
 
 To install this package use npm:
 
 ```bash
-npm install @your-scope/react-package-template
+npm install formik bootstrap react-formik-bootstrap
 ```
 
 ## Local Development
@@ -27,7 +27,7 @@ npm install yalc -g
 First, navigate to the project directory where you want to use this package and run:
 
 ```bash
-yalc add @your-scope/react-package-template
+yalc add react-formik-bootstrap
 ```
 
 This will install the package from the local Yalc store. You can now use it in the project as you would with any other npm package.
@@ -37,7 +37,7 @@ This will install the package from the local Yalc store. You can now use it in t
 After publishing changes to this package to the local Yalc store, navigate to the project directory and run:
 
 ```bash
-yalc update @your-scope/react-package-template
+yalc update react-formik-bootstrap
 ```
 
 This will update the installed version of this package in the project.
