@@ -32,24 +32,22 @@ const InputField: React.FC<InputFieldProps> = ({
                                 {label}
                             </label>
                         )}
-                        <div>
-                            <input
-                                {...field}
-                                id={name}
-                                type={type}
-                                placeholder={placeholder}
-                                className={classnames('form-control', {
-                                    'is-invalid': isInvalid,
-                                    [`form-control-${size}`]: size
-                                })}
-                                disabled={isDisabled}
-                            />
-                            {isInvalid && (
-                                <div className="invalid-feedback">
-                                    <ErrorMessage name={name} />
-                                </div>
-                            )}
-                        </div>
+                        <input
+                            {...field}
+                            id={name}
+                            type={type}
+                            placeholder={placeholder}
+                            className={classnames('form-control', {
+                                'is-invalid': isInvalid,
+                                [`form-control-${size}`]: size
+                            })}
+                            disabled={isDisabled}
+                        />
+                        {isInvalid && (
+                            <div className="invalid-feedback">
+                                <ErrorMessage name={name} />
+                            </div>
+                        )}
                     </div>
                 );
             }}
