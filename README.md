@@ -2,6 +2,10 @@
 
 A React library of Formik-powered, Bootstrap-styled components for efficient form building.
 
+## License
+
+Licensed under MIT. Totally free for private or commercial projects.
+
 ## Getting Started
 
 To install this package use npm:
