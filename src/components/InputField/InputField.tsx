@@ -9,6 +9,8 @@ export interface InputFieldProps {
     placeholder?: string;
     size?: 'lg' | 'sm';
     type?: 'text' | 'password' | 'email' | 'number' | 'url' | 'tel' | 'search';
+    isDisabled?: boolean;
+    isInvalid?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -16,14 +18,16 @@ const InputField: React.FC<InputFieldProps> = ({
     label,
     name,
     placeholder,
-    size
+    size,
+    isDisabled,
+    isInvalid
 }) => {
     return (
         <Field name={name}>
             {({ field, form }: FieldProps) => {
-                const isDisabled = Boolean(form.isSubmitting);
+                const disabled = isDisabled ?? Boolean(form.isSubmitting);
 
-                const isInvalid = Boolean(form.touched[name] && form.errors[name]);
+                const invalid = isInvalid ?? Boolean(form.touched[name] && form.errors[name]);
 
                 return (
                     <div className="form-group">
@@ -38,10 +42,10 @@ const InputField: React.FC<InputFieldProps> = ({
                             type={type}
                             placeholder={placeholder}
                             className={classnames('form-control', {
-                                'is-invalid': isInvalid,
+                                'is-invalid': invalid,
                                 [`form-control-${size}`]: size
                             })}
-                            disabled={isDisabled}
+                            disabled={disabled}
                         />
                         {isInvalid && (
                             <div className="invalid-feedback">

@@ -70,4 +70,14 @@ describe('InputField', () => {
 
         expect(screen.getByRole('textbox')).toBeDisabled();
     });
+
+    test('should disable input when isDisabled prop is true', () => {
+        renderInputField({ isDisabled: true });
+        expect(screen.getByRole('textbox')).toBeDisabled();
+    });
+
+    test('should mark input as invalid when isInvalid prop is true', () => {
+        renderInputField({ isInvalid: true });
+        expect(screen.getByRole('textbox')).toHaveClass('is-invalid');
+    });
 });

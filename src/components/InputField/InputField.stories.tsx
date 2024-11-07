@@ -47,4 +47,21 @@ export const WithoutLabel: Story = {
     }
 };
 
+export const isDisabled: Story = {
+    args: {
+        name: 'email',
+        type: 'email',
+        placeholder: 'Enter your email',
+        isDisabled: true
+    }
+};
+export const isInvalid: Story = {
+    args: {
+        name: 'email',
+        type: 'email',
+        placeholder: 'Enter your email',
+        isInvalid: true
+    }
+};
+
 export default meta;
