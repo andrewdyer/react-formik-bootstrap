@@ -11,6 +11,7 @@ export interface InputFieldProps {
     type?: 'text' | 'password' | 'email' | 'number' | 'url' | 'tel' | 'search';
     isDisabled?: boolean;
     isInvalid?: boolean;
+    hideErrorMessage?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -20,7 +21,8 @@ const InputField: React.FC<InputFieldProps> = ({
     placeholder,
     size,
     isDisabled,
-    isInvalid
+    isInvalid,
+    hideErrorMessage = false
 }) => {
     return (
         <Field name={name}>
@@ -47,7 +49,7 @@ const InputField: React.FC<InputFieldProps> = ({
                             })}
                             disabled={disabled}
                         />
-                        {isInvalid && (
+                        {isInvalid && !hideErrorMessage && (
                             <div className="invalid-feedback">
                                 <ErrorMessage name={name} />
                             </div>
