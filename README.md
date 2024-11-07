@@ -10,6 +10,55 @@ To install this package use npm:
 npm install formik bootstrap react-formik-bootstrap
 ```
 
+## Usage
+
+### Including Bootstrap CSS
+
+First, ensure Bootstrap CSS is included in your project:
+
+```tsx
+// index.tsx
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
+
+### Using the InputField Component
+
+In your App.tsx, or any other component, the InputField component can be used:
+
+```tsx
+// App.tsx
+import React from 'react';
+
+import { Formik, Form } from 'formik';
+import { InputField } from 'react-formik-bootstrap';
+
+function App() {
+    return (
+        <Formik
+            initialValues={{ email: '' }}
+            onSubmit={values => {
+                console.log(values);
+            }}>
+            {() => (
+                <Form>
+                    <InputField
+                        name="email"
+                        label="Email"
+                        type="email"
+                        placeholder="Enter your email"
+                    />
+                    <button type="submit" className="btn btn-primary">
+                        Submit
+                    </button>
+                </Form>
+            )}
+        </Formik>
+    );
+}
+
+export default App;
+```
+
 ## Local Development
 
 For local development, use Yalc to install this package in your project.
