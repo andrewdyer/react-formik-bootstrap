@@ -13,6 +13,7 @@ type InputProps = {
     hideErrorMessage?: boolean;
     addonBefore?: React.ReactNode;
     addonAfter?: React.ReactNode;
+    helpText?: string;
 };
 
 type TextInputProps = InputProps & {
@@ -38,7 +39,8 @@ const InputField: React.FC<InputFieldProps> = ({
     hideErrorMessage = false,
     addonBefore,
     addonAfter,
-    options
+    options,
+    helpText
 }) => {
     return (
         <Field name={name}>
@@ -47,11 +49,14 @@ const InputField: React.FC<InputFieldProps> = ({
 
                 const invalid = isInvalid ?? Boolean(form.touched[name] && form.errors[name]);
 
+                const describedby = helpText ? `${name}-help-block` : undefined;
+
                 const inputElement =
                     type === 'select' ? (
                         <select
                             {...field}
                             id={name}
+                            aria-describedby={describedby}
                             className={classnames('form-select', {
                                 'is-invalid': invalid,
                                 [`form-select-${size}`]: size
@@ -74,6 +79,7 @@ const InputField: React.FC<InputFieldProps> = ({
                             id={name}
                             type={type}
                             placeholder={placeholder}
+                            aria-describedby={describedby}
                             className={classnames('form-control', {
                                 'is-invalid': invalid,
                                 [`form-control-${size}`]: size
@@ -108,6 +114,12 @@ const InputField: React.FC<InputFieldProps> = ({
                             </div>
                         ) : (
                             inputElement
+                        )}
+
+                        {helpText && (
+                            <div id={describedby} className="form-text">
+                                {helpText}
+                            </div>
                         )}
 
                         {!hideErrorMessage && invalid && (

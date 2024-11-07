@@ -136,4 +136,11 @@ describe('InputField', () => {
         expect(screen.getByText('USD')).toBeInTheDocument();
         expect(screen.getByText('EUR')).toBeInTheDocument();
     });
+
+    test('should render input with help text', () => {
+        renderInputField(<InputField name="testField" helpText="Help text" />);
+
+        expect(screen.getByRole('textbox')).toHaveAttribute('aria-describedby');
+        expect(screen.getByText('Help text')).toBeInTheDocument();
+    });
 });

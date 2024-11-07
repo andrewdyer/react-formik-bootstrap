@@ -47,6 +47,15 @@ export const WithoutLabel: Story = {
     }
 };
 
+export const WithHelpText: Story = {
+    args: {
+        label: 'Password',
+        name: 'password',
+        type: 'password',
+        helpText: 'Your password must be 8-20 characters long.'
+    }
+};
+
 export const isDisabled: Story = {
     args: {
         name: 'email',
