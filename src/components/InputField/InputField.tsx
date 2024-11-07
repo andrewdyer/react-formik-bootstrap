@@ -21,6 +21,8 @@ const InputField: React.FC<InputFieldProps> = ({
     return (
         <Field name={name}>
             {({ field, form }: FieldProps) => {
+                const isDisabled = Boolean(form.isSubmitting);
+
                 const isInvalid = Boolean(form.touched[name] && form.errors[name]);
 
                 return (
@@ -40,6 +42,7 @@ const InputField: React.FC<InputFieldProps> = ({
                                     'is-invalid': isInvalid,
                                     [`form-control-${size}`]: size
                                 })}
+                                disabled={isDisabled}
                             />
                             {isInvalid && (
                                 <div className="invalid-feedback">

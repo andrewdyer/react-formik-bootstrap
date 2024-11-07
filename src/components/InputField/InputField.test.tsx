@@ -1,14 +1,23 @@
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Formik } from 'formik';
 
 import InputField, { type InputFieldProps } from './InputField';
 
+const mockSubmit = jest.fn(async () => {
+    await new Promise(r => setTimeout(r, 500));
+});
+
 const renderInputField = (props: Partial<InputFieldProps> = {}) => {
     return render(
-        <Formik initialValues={{ testField: '' }} onSubmit={jest.fn()}>
-            {() => <InputField name="testField" {...props} />}
+        <Formik initialValues={{ testField: '' }} onSubmit={mockSubmit}>
+            {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                    <InputField name="testField" {...props} />
+                    <button type="submit">Submit</button>
+                </form>
+            )}
         </Formik>
     );
 };
@@ -48,5 +57,17 @@ describe('InputField', () => {
         renderInputField({ size: 'lg' });
 
         expect(screen.getByRole('textbox')).toHaveClass('form-control-lg');
+    });
+
+    test('should disable input when form is submitting', async () => {
+        renderInputField({ label: 'Test Label' });
+
+        expect(screen.getByRole('textbox')).not.toBeDisabled();
+
+        await waitFor(() => {
+            fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+        });
+
+        expect(screen.getByRole('textbox')).toBeDisabled();
     });
 });
