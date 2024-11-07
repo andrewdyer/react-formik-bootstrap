@@ -3,18 +3,29 @@ import React from 'react';
 import classnames from 'classnames';
 import { ErrorMessage, Field, type FieldProps } from 'formik';
 
-export interface InputFieldProps {
+type InputProps = {
     label?: string;
     name: string;
     placeholder?: string;
     size?: 'lg' | 'sm';
-    type?: 'text' | 'password' | 'email' | 'number' | 'url' | 'tel' | 'search';
     isDisabled?: boolean;
     isInvalid?: boolean;
     hideErrorMessage?: boolean;
     addonBefore?: React.ReactNode;
     addonAfter?: React.ReactNode;
-}
+};
+
+type TextInputProps = InputProps & {
+    type?: 'text' | 'password' | 'email' | 'number' | 'url' | 'tel' | 'search';
+    options?: never;
+};
+
+type SelectInputProps = InputProps & {
+    type: 'select';
+    options: Array<{ value: string; label: string }>;
+};
+
+export type InputFieldProps = TextInputProps | SelectInputProps;
 
 const InputField: React.FC<InputFieldProps> = ({
     type = 'text',
@@ -26,7 +37,8 @@ const InputField: React.FC<InputFieldProps> = ({
     isInvalid,
     hideErrorMessage = false,
     addonBefore,
-    addonAfter
+    addonAfter,
+    options
 }) => {
     return (
         <Field name={name}>
@@ -35,19 +47,40 @@ const InputField: React.FC<InputFieldProps> = ({
 
                 const invalid = isInvalid ?? Boolean(form.touched[name] && form.errors[name]);
 
-                const inputElement = (
-                    <input
-                        {...field}
-                        id={name}
-                        type={type}
-                        placeholder={placeholder}
-                        className={classnames('form-control', {
-                            'is-invalid': invalid,
-                            [`form-control-${size}`]: size
-                        })}
-                        disabled={disabled}
-                    />
-                );
+                const inputElement =
+                    type === 'select' ? (
+                        <select
+                            {...field}
+                            id={name}
+                            className={classnames('form-select', {
+                                'is-invalid': invalid,
+                                [`form-select-${size}`]: size
+                            })}
+                            disabled={disabled}>
+                            {placeholder && (
+                                <option value="" disabled>
+                                    {placeholder}
+                                </option>
+                            )}
+                            {options?.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+                    ) : (
+                        <input
+                            {...field}
+                            id={name}
+                            type={type}
+                            placeholder={placeholder}
+                            className={classnames('form-control', {
+                                'is-invalid': invalid,
+                                [`form-control-${size}`]: size
+                            })}
+                            disabled={disabled}
+                        />
+                    );
 
                 const renderAddon = (addon: React.ReactNode) =>
                     typeof addon === 'string' ? (

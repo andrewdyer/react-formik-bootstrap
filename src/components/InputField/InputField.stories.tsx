@@ -99,4 +99,32 @@ export const WithAddonBoth: Story = {
     }
 };
 
+export const SelectWithOptions: Story = {
+    args: {
+        label: 'Select Option',
+        name: 'selectOption',
+        type: 'select',
+        options: [
+            { value: 'option1', label: 'Option 1' },
+            { value: 'option2', label: 'Option 2' },
+            { value: 'option3', label: 'Option 3' }
+        ]
+    }
+};
+
+export const SelectWithAddonBoth: Story = {
+    args: {
+        label: 'Currency',
+        name: 'currency',
+        type: 'select',
+        options: [
+            { value: 'usd', label: 'USD' },
+            { value: 'eur', label: 'EUR' },
+            { value: 'gbp', label: 'GBP' }
+        ],
+        addonBefore: '$',
+        addonAfter: 'per item'
+    }
+};
+
 export default meta;
