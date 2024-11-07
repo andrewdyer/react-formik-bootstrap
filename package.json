@@ -1,7 +1,7 @@
 {
     "name": "react-formik-bootstrap",
     "description": "A React library of Formik-powered, Bootstrap-styled components for efficient form building",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
     "types": "dist/types/index.d.ts",
