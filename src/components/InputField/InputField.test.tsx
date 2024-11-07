@@ -80,4 +80,40 @@ describe('InputField', () => {
         renderInputField({ isInvalid: true });
         expect(screen.getByRole('textbox')).toHaveClass('is-invalid');
     });
+
+    test('should render addonBefore as InputGroupText when it is a string', () => {
+        renderInputField({ addonBefore: '£' });
+
+        const addonBefore = screen.getByText('£');
+
+        expect(addonBefore).toBeInTheDocument();
+        expect(addonBefore).toHaveClass('input-group-text');
+    });
+
+    test('should render addonAfter as InputGroupText when it is a string', () => {
+        renderInputField({ addonAfter: '.00' });
+
+        const addonAfter = screen.getByText('.00');
+
+        expect(addonAfter).toBeInTheDocument();
+        expect(addonAfter).toHaveClass('input-group-text');
+    });
+
+    test('should render addonBefore without InputGroupText wrapper when it is a JSX element', () => {
+        renderInputField({ addonBefore: <button>Go</button> });
+
+        const addonButton = screen.getByRole('button', { name: 'Go' });
+
+        expect(addonButton).toBeInTheDocument();
+        expect(addonButton).not.toHaveClass('input-group-text');
+    });
+
+    test('should render addonAfter without InputGroupText wrapper when it is a JSX element', () => {
+        renderInputField({ addonAfter: <button>Search</button> });
+
+        const addonButton = screen.getByRole('button', { name: 'Search' });
+
+        expect(addonButton).toBeInTheDocument();
+        expect(addonButton).not.toHaveClass('input-group-text');
+    });
 });

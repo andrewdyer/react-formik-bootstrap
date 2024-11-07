@@ -64,4 +64,39 @@ export const isInvalid: Story = {
     }
 };
 
+export const WithAddonBeforeText: Story = {
+    args: {
+        label: 'Username',
+        name: 'username',
+        type: 'text',
+        placeholder: 'Enter your username',
+        addonBefore: '@'
+    }
+};
+
+export const WithAddonAfterButton: Story = {
+    args: {
+        label: 'Search',
+        name: 'search',
+        type: 'text',
+        placeholder: 'Enter search term',
+        addonAfter: (
+            <button type="button" className="btn btn-primary">
+                Go
+            </button>
+        )
+    }
+};
+
+export const WithAddonBoth: Story = {
+    args: {
+        label: 'Price',
+        name: 'price',
+        type: 'text',
+        placeholder: 'Enter amount',
+        addonBefore: '£',
+        addonAfter: '.00'
+    }
+};
+
 export default meta;
