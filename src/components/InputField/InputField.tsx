@@ -3,6 +3,33 @@ import React from 'react';
 import classnames from 'classnames';
 import { ErrorMessage, Field, type FieldProps } from 'formik';
 
+type InputType =
+    | 'text'
+    | 'email'
+    | 'file'
+    | 'radio'
+    | 'checkbox'
+    | 'switch'
+    | 'textarea'
+    | 'button'
+    | 'reset'
+    | 'submit'
+    | 'date'
+    | 'datetime-local'
+    | 'hidden'
+    | 'image'
+    | 'month'
+    | 'number'
+    | 'range'
+    | 'search'
+    | 'tel'
+    | 'url'
+    | 'week'
+    | 'password'
+    | 'datetime'
+    | 'time'
+    | 'color';
+
 type InputProps = {
     label?: string;
     name: string;
@@ -17,7 +44,7 @@ type InputProps = {
 };
 
 type TextInputProps = InputProps & {
-    type?: 'text' | 'password' | 'email' | 'number' | 'url' | 'tel' | 'search';
+    type?: InputType;
     options?: never;
 };
 
